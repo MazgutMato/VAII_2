@@ -18,7 +18,7 @@ $posledny = $data['filmy'][($arraySize-1)];
                     <table class="table tabulka">
                         <tbody>
                         <tr>
-                            <td><img src=" <?php if (count($film->getObrazky()) > 0) { echo $film->getObrazky()[0]->url; }
+                            <td><img src=" <?php if (count($film->getObrazky()) > 0) { echo $film->getObrazky()[0]->obrazok; }
                                 else { echo "https://elitebaby.sk/files/shop/default.jpg";} ?>" class="img-news" alt="..."></td>
                         </tr>
                         <tr>
@@ -47,7 +47,7 @@ $posledny = $data['filmy'][($arraySize-1)];
                         Žáner: <?= $posledny->zaner ?>
                     </p>
                     <p>
-                        Krajina: <?= $posledny->zaner ?>
+                        Krajina: <?= $posledny->krajina ?>
                     </p>
                     <p>
                         Réžia: <?= $posledny->rezia ?>
@@ -63,7 +63,7 @@ $posledny = $data['filmy'][($arraySize-1)];
                     <table class="table tabulka">
                         <tbody>
                         <tr>
-                            <td><img src="<?php if (count($posledny->getObrazky()) > 0) { echo $posledny->getObrazky()[0]->url; }
+                            <td><img src="<?php if (count($posledny->getObrazky()) > 0) { echo $posledny->getObrazky()[0]->obrazok; }
                                 else { echo "https://elitebaby.sk/files/shop/default.jpg";} ?>" class="img-news" alt="..."></td>
                         </tr>
                         <tr>

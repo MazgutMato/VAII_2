@@ -14,7 +14,7 @@
                     <table class="table tabulka">
                         <tbody>
                         <tr>
-                            <td><img src="<?php if (count($film->getObrazky()) > 0) { echo $film->getObrazky()[0]->url; }
+                            <td><img src="<?php if (count($film->getObrazky()) > 0) { echo $film->getObrazky()[0]->obrazok; }
                                 else { echo "https://elitebaby.sk/files/shop/default.jpg";} ?>" class="img-news" alt="..."></td>
                         </tr>
                         <tr>

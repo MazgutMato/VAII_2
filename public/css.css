@@ -59,12 +59,10 @@ a:hover {
 }
 .btn-secondary:hover{
     background-color: darkred!important;
-    opacity: 100!important;
 }
-.plnahviezda {
+.prazdne{
+    background-color: gray!important;
+}
+.plne{
     background-color: darkred!important;
-    opacity: 100!important;
-}
-.prazdnahviezda {
-    opacity: 0!important;
 }

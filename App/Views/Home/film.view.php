@@ -20,7 +20,7 @@
                             if ($index == 0) { ?>
                             active
                         <?php } ?> ">
-                                <img src="<?= $obrazok->url ?>" class="d-block w-100 img-info" alt="...">
+                                <img src="<?= $obrazok->obrazok ?>" class="d-block w-100 img-info" alt="...">
                             </div>
                         <?php }} ?>
                     </div>
@@ -34,15 +34,20 @@
                     </button>
                 </div>
                 <?php if (\App\Auth::isLogged()) { ?>
-                <form method="post" action="?c=home&a=pridajObrazok" class="mt-2">
-                    <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
-                    <div class="mb-1">
-                        <input class="form-control" placeholder="Zadaj url" type="url" name="url" required>
-                    </div>
-                    <div class="mb-1">
-                        <input type="submit" class="btn btn-secondary" name="pridajObrazok" value="Pridaj obrazok">
-                    </div>
-                </form>
+                <div class="card bg-dark m-2 p-2 border">
+                    <form method="post" action="?c=home&a=pridajObrazok" class="mt-2" enctype="multipart/form-data">
+                        <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
+                        <div class="mb-1">
+                            <div class="d-flex justify-content-center">
+                                <label class="form-label" for="obrazok">Pridaj obrazok</label>
+                            </div>
+                            <input class="form-control" placeholder="Zadaj subor" type="file" name="file" id="obrazok" required>
+                        </div>
+                        <div class="d-flex justify-content-center mb-1">
+                            <input type="submit" class="btn btn-secondary" name="pridajObrazok" value="Odosli obrazok">
+                        </div>
+                    </form>
+                </div>
                 <?php } ?>
             </div>
             <div class="col-12 col-md-6 zakladneinfo p-3">

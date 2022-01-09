@@ -38,11 +38,18 @@ class HomeController extends AControllerRedirect
     public function pridajObrazok()
     {
         $filmId['filmId'] = $this->request()->getValue('filmId');
-        $obrazok = new Obrazok();
-        $obrazok->film_id = $filmId['filmId'];
-        $obrazok->url = $this->request()->getValue('url');
-        $obrazok->save();
+        if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
+            $meno = date('Y-m-d-H-m-s_') . $_FILES['file']['name'];
+            $path = "obrazky/$meno";
+            move_uploaded_file($_FILES['file']['tmp_name'], $path);
 
+            $obrazok = new Obrazok();
+            $obrazok->film_id = $filmId['filmId'];
+            $obrazok->obrazok = $path;
+            $obrazok->save();
+        } else {
+            die('Image upload error');
+        }
         $this->redirect('home','film',$filmId);
     }
 
