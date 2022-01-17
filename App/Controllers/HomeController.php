@@ -54,6 +54,11 @@ class HomeController extends AControllerRedirect
                 $this->redirect('home', 'film', $param);
                 return;
             }
+            if (strlen($path) > 255) {
+                $param['error'] = "Meno obrazku je prilis dlhe!";
+                $this->redirect('home', 'film', $param);
+                return;
+            }
             if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
                 move_uploaded_file($_FILES['file']['tmp_name'], $path);
 
@@ -132,6 +137,10 @@ class HomeController extends AControllerRedirect
                 return;
             }
             if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
+                if (strlen($path) > 255){
+                    $this->redirect('home', 'film', ['error' => 'Film nebol pridaný, meno obrázku je dlhé!']);
+                    return;
+                }
                 move_uploaded_file($_FILES['file']['tmp_name'], $path);
                 $film->obrazok = $path;
             } else {

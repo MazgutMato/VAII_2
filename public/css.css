@@ -73,6 +73,14 @@ a:hover {
     margin: auto;
     vertical-align: middle;
 }
+.pouzivatelTabTdNadpisPrvy{
+    width: 150px;
+    text-align: right;
+    text-decoration: underline;
+    font-weight: bold;
+    margin: auto;
+    vertical-align: middle;
+}
 .pouzivatelTabTdText{
     text-align: left;
     margin: auto;

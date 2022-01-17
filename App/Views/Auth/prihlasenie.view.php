@@ -21,11 +21,11 @@
             <form method="post" action="?c=auth&a=login">
                 <div class="mb-3">
                     <label for="login" class="form-label">Login</label>
-                    <input class="form-control" placeholder="Zadaj login" type="text" name="login" minlength="3" required>
+                    <input class="form-control" placeholder="Zadaj login" type="text" name="login" minlength="3" id="login" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Zadaj heslo</label>
-                    <input class="form-control" placeholder="Zadaj heslo" type="password" name="password" required>
+                    <input class="form-control" placeholder="Zadaj heslo" type="password" name="password" id="password" required>
                 </div>
                 <a href="?c=auth&a=registracia">Najskôr sa musíte registrovať!</a>
                 <div class="mt-3 mb-3">

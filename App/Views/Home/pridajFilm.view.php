@@ -18,8 +18,8 @@
 
         <form method="post" action="?c=home&a=formFilm" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="orgNazov" class="form-label">Zadaj základne informacie o filme:</label>
-                <input class="form-control mb-1" placeholder="Názov" type="text" name="nazov" required>
+                <label for="nazov" class="form-label">Zadaj základne informacie o filme:</label>
+                <input class="form-control mb-1" placeholder="Názov" type="text" name="nazov" id="nazov" required>
                 <input class="form-control mb-1" placeholder="Orig.nazov" type="text" name="orgNazov" required>
                 <input class="form-control mb-1" placeholder="Žáner" type="text" name="zaner" required>
                 <input class="form-control mb-1" placeholder="Krajina" type="text" name="krajina" required>
@@ -27,7 +27,7 @@
                 <input class="form-control mb-1" placeholder="Scenár" type="text" name="scenar" required>
                 <input class="form-control mb-1" placeholder="Hrajú" type="text" name="hraju" required>
                 <label class="form-label" for="obrazok">Pridaj obrazok</label>
-                <input class="form-control" placeholder="Zadaj subor" type="file" name="file" id="obrazok" required>
+                <input class="form-control" type="file" name="file" id="obrazok" required>
 
             </div>
                 <label class="form-label" for="obsah">Pridaj obsah</label>

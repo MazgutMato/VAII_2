@@ -58,7 +58,7 @@ if ($arraySize > 0){
                         <tbody>
                         <tr>
                             <td><a href="?c=home&a=film&filmId=<?= $posledny->id ?>" class="odkaz">
-                                <img src="<?php echo $posledny->obrazok?>" class="img-news"></a>
+                                <img src="<?php echo $posledny->obrazok?>" class="img-news" alt="obrazky/chyba.jpg"></a>
                             </td>
                         </tr>
                         <tr>
@@ -88,7 +88,7 @@ if ($arraySize > 0){
                         <tbody>
                         <tr>
                             <td><a href="?c=home&a=film&filmId=<?= $film->id ?>" class="odkaz">
-                                <img src=" <?php echo $film->obrazok?>" class="img-news"></a></td>
+                                <img src=" <?php echo $film->obrazok?>" class="img-news" alt="obrazky/chyba.jpg"></a></td>
                         </tr>
                         <tr>
                             <td>
