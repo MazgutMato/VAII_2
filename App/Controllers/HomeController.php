@@ -81,44 +81,44 @@ class HomeController extends AControllerRedirect
         }
         $film = new Film();
         $film->autor = Auth::getName();
-        if ($this->request()->getValue('nazov') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste nazov!']);
+        if ($this->request()->getValue('nazov') == "" || strlen($this->request()->getValue('nazov')) > 50) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj nazov!']);
             return;
         } else {
             $film->nazov = $this->request()->getValue('nazov');
         }
-        if ($this->request()->getValue('orgNazov') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste orgNazov!']);
+        if ($this->request()->getValue('orgNazov') == "" || strlen($this->request()->getValue('orgNazov')) > 50) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj orgNazov!']);
             return;
         } else {
             $film->orgNazov = $this->request()->getValue('orgNazov');
         }
-        if ($this->request()->getValue('zaner') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste zaner!']);
+        if ($this->request()->getValue('zaner') == "" || strlen($this->request()->getValue('zaner')) > 50) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj zaner!']);
             return;
         } else {
             $film->zaner = $this->request()->getValue('zaner');
         }
-        if ($this->request()->getValue('krajina') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste krajina!']);
+        if ($this->request()->getValue('krajina') == "" || strlen($this->request()->getValue('krajina')) > 50) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany krajina!']);
             return;
         } else {
             $film->krajina = $this->request()->getValue('krajina');
         }
-        if ($this->request()->getValue('rezia') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste rezia!']);
+        if ($this->request()->getValue('rezia') == "" || strlen($this->request()->getValue('rezia')) > 255) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj rezia!']);
             return;
         } else {
             $film->rezia = $this->request()->getValue('rezia');
         }
-        if ($this->request()->getValue('scenar') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste scenar!']);
+        if ($this->request()->getValue('scenar') == "" || strlen($this->request()->getValue('scenar')) > 255) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj scenar!']);
             return;
         } else {
             $film->scenar = $this->request()->getValue('scenar');
         }
-        if ($this->request()->getValue('hraju') == "") {
-            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, nezadali ste hraju!']);
+        if ($this->request()->getValue('hraju') == "" || strlen($this->request()->getValue('hraju')) > 255) {
+            $this->redirect('home','pridajFilm',['error' => 'Film nebol pridaný, zle zadany udaj hraju!']);
             return;
         } else {
             $film->hraju = $this->request()->getValue('hraju');
@@ -346,11 +346,35 @@ class HomeController extends AControllerRedirect
         if (isset($_POST['id'])){
             $film = Film::getOne($_POST['id']);
             if ($film && $film->autor == Auth::getName()) {
-                $film->nazov = $_POST['nazov'];
+                if ($_POST['nazov'] == "" || strlen($_POST['nazov']) > 50){
+                    $data['error'] = "Chyba pri zadani org. nazovu!";
+                    return $this->json($data);
+                }
+                $film->orgNazov = $_POST['nazov'];
+                if ($_POST['zaner'] == "" || strlen($_POST['zaner']) > 50){
+                    $data['error'] = "Chyba pri zadani zaneru!";
+                    return $this->json($data);
+                }
                 $film->zaner = $_POST['zaner'];
+                if ($_POST['krajina'] == "" || strlen($_POST['krajina']) > 50){
+                    $data['error'] = "Chyba pri zadani krajiny!";
+                    return $this->json($data);
+                }
                 $film->krajina = $_POST['krajina'];
+                if ($_POST['rezia'] == "" || strlen($_POST['rezia']) > 255){
+                    $data['error'] = "Chyba pri zadani rezie!";
+                    return $this->json($data);
+                }
                 $film->rezia = $_POST['rezia'];
+                if ($_POST['scenar'] == "" || strlen($_POST['scenar']) > 255){
+                    $data['error'] = "Chyba pri zadani scenaru!";
+                    return $this->json($data);
+                }
                 $film->scenar = $_POST['scenar'];
+                if ($_POST['hraju'] == "" || strlen($_POST['hraju']) > 255){
+                    $data['error'] = "Chyba pri zadavani hraju!";
+                    return $this->json($data);
+                }
                 $film->hraju = $_POST['hraju'];
                 $film->save();
                 return $this->json($film);

@@ -16,7 +16,7 @@ function nacitajFilm(id){
         });
 }
 function zmenForm(data){
-    document.getElementById('nazovFilmu').value = data.nazov;
+    document.getElementById('nazovFilmu').value = data.orgNazov;
     document.getElementById('zaner').value = data.zaner;
     document.getElementById('krajina').value = data.krajina;
     document.getElementById('rezia').value = data.rezia;
@@ -24,7 +24,7 @@ function zmenForm(data){
     document.getElementById('hraju').value = data.hraju;
 }
 function zmenData(data){
-    document.getElementById('nazovFilmuP').innerHTML = data.nazov;
+    document.getElementById('nazovFilmuP').innerHTML = data.orgNazov;
     document.getElementById('zanerP').innerHTML = data.zaner;
     document.getElementById('krajinaP').innerHTML = data.krajina;
     document.getElementById('reziaP').innerHTML = data.rezia;

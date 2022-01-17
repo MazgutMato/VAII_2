@@ -64,11 +64,11 @@ class AuthController extends AControllerRedirect
         $login = $this->request()->getValue('login');
         $password1 = $this->request()->getValue('password1');
         $password2 = $this->request()->getValue('password2');
-        if (strlen($login) < 3){
+        if (strlen($login) < 3 || strlen($login) > 255){
             $this->redirect('auth','registracia',['error' => 'Chyba pri zadávaní loginu!']);
             return;
         }
-        if (strlen($password1) < 5 || strcmp($password1,$password2) != 0){
+        if (strlen($password1) < 5 || strlen($password1) > 255 || strcmp($password1,$password2) != 0){
             $this->redirect('auth','registracia',['error' => 'Chyba pri zadávaní hesla!']);
             return;
         }
