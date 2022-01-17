@@ -2,14 +2,15 @@
 
 namespace App;
 
+use App\Models\Pouzivatel;
+
 class Auth
 {
-    const LOGIN = "admin";
-    const PASSWORD = "admin123";
 
     public static function login($login,$password)
     {
-        if ($login == self::LOGIN && $password == self::PASSWORD){
+        $pouzivatel = Pouzivatel::getAll('meno = ?',[$login]);
+        if ($pouzivatel[0] && password_verify($password,$pouzivatel[0]->heslo)){
             $_SESSION["name"] = $login;
             return true;
         } else {

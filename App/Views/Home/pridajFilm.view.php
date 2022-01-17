@@ -1,6 +1,6 @@
 <div class="container bg-dark mt-5">
     <div class="row">
-        <div class="col-12 mt-3"><h1>Pridanie filmu</h1></div>
+        <div class="col-12 mt-3 border-bottom mb-3"><h1>Pridanie filmu</h1></div>
     </div>
     <div class="row m-3">
         <?php if (isset($_GET['success'])) {?>
@@ -16,7 +16,7 @@
             </div>
         <?php } ?>
 
-        <form method="post" action="?c=home&a=formFilm">
+        <form method="post" action="?c=home&a=formFilm" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="orgNazov" class="form-label">Zadaj základne informacie o filme:</label>
                 <input class="form-control mb-1" placeholder="Názov" type="text" name="nazov" required>
@@ -26,13 +26,13 @@
                 <input class="form-control mb-1" placeholder="Režia" type="text" name="rezia" required>
                 <input class="form-control mb-1" placeholder="Scenár" type="text" name="scenar" required>
                 <input class="form-control mb-1" placeholder="Hrajú" type="text" name="hraju" required>
-            </div>
+                <label class="form-label" for="obrazok">Pridaj obrazok</label>
+                <input class="form-control" placeholder="Zadaj subor" type="file" name="file" id="obrazok" required>
 
-            <div class="form-floating mb-3">
-                <p>Obsah:</p>
-                <textarea class="form-control " id="obsah" name="obsah" ></textarea>
             </div>
-            <div class="mb-3">
+                <label class="form-label" for="obsah">Pridaj obsah</label>
+                <textarea class="form-control " id="obsah" name="obsah" required></textarea>
+            <div class="mb-3 mt-2">
                 <input type="submit" class="btn btn-secondary" name="pridaj" value="Pridaj">
             </div>
         </form>

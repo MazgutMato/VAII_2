@@ -60,9 +60,21 @@ a:hover {
 .btn-secondary:hover{
     background-color: darkred!important;
 }
-.prazdne{
-    background-color: gray!important;
+.pouzivatelTab{
+    background-color: black;
+    border-style: inset;
+    border-color: white;
+    color: #e3f2fd;
 }
-.plne{
-    background-color: darkred!important;
+.pouzivatelTabTdNadpis{
+    text-align: right;
+    text-decoration: underline;
+    font-weight: bold;
+    margin: auto;
+    vertical-align: middle;
+}
+.pouzivatelTabTdText{
+    text-align: left;
+    margin: auto;
+    vertical-align: middle;
 }

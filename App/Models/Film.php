@@ -18,7 +18,9 @@ class Film extends \App\Core\Model
         public ?string $obsah = null,
         public int $pocetHodnoteni = 0,
         public float $hodnotenie = 0,
-        public int $pocetHviezd = 0
+        public int $pocetHviezd = 0,
+        public ?string $autor= null,
+        public ?string $obrazok= null,
     )
     {
 
@@ -27,7 +29,7 @@ class Film extends \App\Core\Model
     static public function setDbColumns()
     {
         return ['id','nazov','orgNazov','zaner','krajina','rezia','scenar','hraju',
-            'obsah','pocetHodnoteni','hodnotenie','pocetHviezd'];
+            'obsah','pocetHodnoteni','hodnotenie','pocetHviezd','autor','obrazok'];
     }
 
     static public function setTableName()
@@ -51,7 +53,7 @@ class Film extends \App\Core\Model
         return $priemer;
     }
 
-    public function getZaujimavosti(){
-        return Zaujimavost::getAll('film_id = ?',[$this->id]);
+    public function getKomentare(){
+        return Komentar::getAll('film_id = ?',[$this->id]);
     }
 }

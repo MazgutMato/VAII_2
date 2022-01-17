@@ -14,30 +14,36 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
         <i class="bi bi-film icon"></i>
-        <a class="navbar-brand" href="#">Filmpedia</a>
+        <a class="navbar-brand odkaz" href="#">Filmpedia</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=home">Domov</a>
+                    <a class="nav-link odkaz" href="?c=home">Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=home&a=rebricek">Rebríček filmov</a>
+                    <a class="nav-link odkaz" href="?c=home&a=zoznam">Zoznam filmov</a>
                 </li>
 
                 <?php if (\App\Auth::isLogged()) {?>
                     <li class="nav-item">
-                        <a class="nav-link" href="?c=home&a=pridajFilm">Pridanie filmu</a>
+                        <a class="nav-link odkaz" href="?c=home&a=pridajFilm">Pridanie filmu</a>
+                    </li>
+                    <li class="nav-item justify-content-end">
+                        <a class="nav-link odkaz" href="?c=auth&a=uzivatel"><?=\App\Auth::getName()?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?c=auth&a=logout">Odhlasenie</a>
+                        <a class="nav-link odkaz" href="?c=auth&a=logout">Odhlasenie</a>
                     </li>
                 <?php } else { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=auth&a=prihlasenie">Prihlasenie</a>
+                    <a class="nav-link odkaz" href="?c=auth&a=prihlasenie">Prihlasenie</a>
                 </li>
+                    <li class="nav-item">
+                        <a class="nav-link odkaz" href="?c=auth&a=registracia">Registracia</a>
+                    </li>
                 <?php } ?>
 
             </ul>

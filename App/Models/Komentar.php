@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Zaujimavost extends \App\Core\Model
+class Komentar extends \App\Core\Model
 {
 
     public function __construct(
@@ -20,7 +20,7 @@ class Zaujimavost extends \App\Core\Model
 
     static public function setTableName()
     {
-        return 'zaujimavosti';
+        return 'komentare';
     }
 
 }
