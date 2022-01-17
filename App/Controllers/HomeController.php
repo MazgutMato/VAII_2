@@ -331,7 +331,36 @@ class HomeController extends AControllerRedirect
     public function getFilm(){
         if (isset($_POST['id'])){
             $film = Film::getOne($_POST['id']);
-            return $this->json($film);
+            if ($film && $film->autor == Auth::getName()) {
+                return $this->json($film);
+            } else {
+                $data['error'] = "Nastala chyba!";
+                return $this->json($data);
+            }
+        } else {
+            $data['error'] = "Nastala chyba!";
+            return $this->json($data);
+        }
+    }
+    public function setFilm(){
+        if (isset($_POST['id'])){
+            $film = Film::getOne($_POST['id']);
+            if ($film && $film->autor == Auth::getName()) {
+                $film->nazov = $_POST['nazov'];
+                $film->zaner = $_POST['zaner'];
+                $film->krajina = $_POST['krajina'];
+                $film->rezia = $_POST['rezia'];
+                $film->scenar = $_POST['scenar'];
+                $film->hraju = $_POST['hraju'];
+                $film->save();
+                return $this->json($film);
+            } else {
+                $data['error'] = "Nastala chyba!";
+                return $this->json($data);
+            }
+        } else {
+            $data['error'] = "Nastala chyba!";
+            return $this->json($data);
         }
     }
 }

@@ -1,7 +1,12 @@
 <?php /** @var Array $data */ ?>
+<?php if (\App\Auth::getName() == $data['film']->autor) { ?>
+<script src="public/film.js"></script>
+<script type = "text/javascript">
+    nacitajFilm(<?= $data['film']->id?>)
+</script>
+<?php } ?>
 <div class="container bg-dark">
     <div class="container bg-dark mt-5">
-        <div id="komentare"></div>
         <div class="row mt-2">
             <?php if (isset($_GET['success'])) {?>
                 <div class="alert alert-success alert-dismissible mt-3">
@@ -68,33 +73,64 @@
                 <?php } ?>
             </div>
             <div class="col-12 col-md-6 zakladneinfo p-3">
-                <p>
-                    Orig. názov: <?= $data['film']->orgNazov ?>
-                </p>
-                <p>
-                    Žáner: <?= $data['film']->zaner ?>
-                </p>
-                <p>
-                    Krajina: <?= $data['film']->krajina ?>
-                </p>
-                <p>
-                    Réžia: <?= $data['film']->rezia ?>
-                </p>
-                <p>
-                    Scenár: <?= $data['film']->scenar ?>
-                </p>
-                <p>
-                    Hrajú: <?= $data['film']->hraju ?>
-                </p>
-                <p>
-                    Príspevok pridal: <?= $data['film']->autor ?>
-                    <?php if ($data['film']->autor == \App\Auth::getName()) { ?>
+                Orig. názov: <div id="nazovFilmuP" class="m-2"><?= $data['film']->orgNazov ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="nazovFilmu">
+                    </div>
+                </div>
+                <?php } ?>
+                Žáner: <div id="zanerP" class="m-2"><?= $data['film']->zaner ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="zaner">
+                    </div>
+                </div>
+                <?php } ?>
+                Krajina: <div id="krajinaP" class="m-2"><?= $data['film']->krajina ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="krajina">
+                    </div>
+                </div>
+                <?php } ?>
+                Réžia: <div id="reziaP" class="m-2"><?= $data['film']->rezia ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="rezia">
+                    </div>
+                </div>
+                <?php } ?>
+                Scenár: <div id="scenarP" class="m-2"><?= $data['film']->scenar ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="scenar">
+                    </div>
+                </div>
+                <?php } ?>
+                Hrajú: <div id="hrajuP" class="m-2"><?= $data['film']->hraju ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="hraju">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-secondary mb-3" id="upravFilm">Uprav film</button>
+                    </div>
+                </div>
+                <?php } ?>
+                    Príspevok pridal: <div class="m-2"><?= $data['film']->autor ?></div>
+                <?php if ($data['film']->autor == \App\Auth::getName()) { ?>
                 <form method="post" action="?c=home&a=zmazFilm">
                     <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
                     <button class="btn btn-secondary" type="submit">Zmaž film</button>
                 </form>
-                    <?php } ?>
-                </p>
+                <?php } ?>
             </div>
         </div>
 

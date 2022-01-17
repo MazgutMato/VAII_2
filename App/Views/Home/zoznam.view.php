@@ -1,5 +1,5 @@
 <?php /** @var Array $data */ ?>
-<script src="public/filmy.js"></script>
+<script src="public/zoznam_filmov.js"></script>
 <div class="container bg-dark">
     <div class="container bg-dark mt-5">
         <div class="row mt-2">
@@ -45,7 +45,7 @@
         </div>
         <div class="row m-3 justify-content-end">
             <div class="col-12 col-lg-3">
-                <input type="text" class="form-control mb-3"" id="nazovFilmu" placeholder="Zadaj názov filmu">
+                <input type="text" class="form-control mb-3" id="nazovFilmu" placeholder="Zadaj názov filmu">
             </div>
             <div class="col-12 col-lg-2">
                 <button type="submit" class="btn btn-secondary mb-3" id="vyhladaj">Vyhladaj</button>
