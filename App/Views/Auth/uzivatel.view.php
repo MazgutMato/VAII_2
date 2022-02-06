@@ -54,12 +54,12 @@
             <table class="table tabulka">
                 <tbody>
                 <tr>
-                    <td><a href="?c=home&a=film&filmId=<?= $film->id ?>" class="odkaz">
+                    <td><a href="?c=movie&a=film&filmId=<?= $film->id ?>" class="odkaz">
                             <img src="<?php echo $film->obrazok?>" class="img-news" alt="obrazky/chyba.jpg"></a>
                     </td>
                 </tr>
                 <tr>
-                    <td><a href="?c=home&a=film&filmId=<?= $film->id ?>" class="odkaz"><?= $film->nazov ?></a></td>
+                    <td><a href="?c=movie&a=film&filmId=<?= $film->id ?>" class="odkaz"><?= $film->nazov ?></a></td>
                 </tr>
                 <tr>
                     <td><button class="btn btn-secondary" onclick="zmazFilm(<?= $film->id ?>)">Zmaž film</button></td>

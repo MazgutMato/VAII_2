@@ -39,7 +39,7 @@
             </div>
             <div class="col-12 col-lg-3 mt-2 mb-2">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-secondary" id="datum">Dátum pridania</button>
+                    <button class="btn btn-secondary" id="datum">Dátum premiery</button>
                 </div>
             </div>
         </div>

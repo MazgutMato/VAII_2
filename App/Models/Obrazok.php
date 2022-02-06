@@ -20,4 +20,9 @@ class Obrazok extends \App\Core\Model
     {
         return 'obrazok';
     }
+
+    public function zmaz(){
+        unlink($this->obrazok);
+        $this->delete();
+    }
 }

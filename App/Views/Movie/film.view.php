@@ -1,10 +1,11 @@
 <?php /** @var Array $data */ ?>
-<?php if (\App\Auth::getName() == $data['film']->autor) { ?>
 <script src="public/film.js"></script>
 <script type = "text/javascript">
-    nacitajFilm(<?= $data['film']->id?>)
+    nacitajId(<?= $data['film']->id?>)
+    <?php if (\App\Auth::getName() == $data['film']->autor) { ?>
+    nacitajFilm()
+    <?php } ?>
 </script>
-<?php } ?>
 <div class="container bg-dark">
     <div class="container bg-dark mt-5">
         <div class="row mt-2">
@@ -36,7 +37,7 @@
                                 <img src="<?= $obrazok->obrazok ?>" class="d-block w-100 img-info" alt="...">
                                 <?php if (\App\Auth::getName() == $data['film']->autor && \App\Auth::isLogged()) { ?>
                                 <div class="d-flex justify-content-center">
-                                    <form method="post" action="?a=zmazObrazok">
+                                    <form method="post" action="?c=image&a=zmazObrazok">
                                         <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
                                         <input type="hidden" name="obrazokId" value="<?php echo $obrazok->id ?>">
                                         <button class="btn btn-secondary">Zmaz obrázok</button>
@@ -57,7 +58,7 @@
                 </div>
                 <?php if (\App\Auth::getName() == $data['film']->autor && \App\Auth::isLogged()) { ?>
                 <div class="card bg-dark m-2 p-2 border">
-                    <form method="post" action="?c=home&a=pridajObrazok" class="mt-2" enctype="multipart/form-data">
+                    <form method="post" action="?c=image&a=pridajObrazok" class="mt-2" enctype="multipart/form-data">
                         <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
                         <div class="mb-1">
                             <div class="d-flex justify-content-center">
@@ -113,6 +114,14 @@
                     </div>
                 </div>
                 <?php } ?>
+                Dátum premiery: <div id="premieraP" class="m-2"><?= $data['film']->premiera ?></div>
+                <?php if($data['film']->autor == \App\Auth::getName()) { ?>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="date" class="form-control mb-3" id="premiera">
+                        </div>
+                    </div>
+                <?php } ?>
                 Hrajú: <div id="hrajuP" class="m-2"><?= $data['film']->hraju ?></div>
                 <?php if($data['film']->autor == \App\Auth::getName()) { ?>
                 <div class="row">
@@ -126,7 +135,7 @@
                 <?php } ?>
                     Príspevok pridal: <div class="m-2"><?= $data['film']->autor ?></div>
                 <?php if ($data['film']->autor == \App\Auth::getName()) { ?>
-                <form method="post" action="?c=home&a=zmazFilm">
+                <form method="post" action="?c=movie&a=zmazFilm">
                     <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
                     <button class="btn btn-secondary" type="submit">Zmaž film</button>
                 </form>
@@ -152,7 +161,7 @@
                 </div>
                 <div class="row">
                     <div class="d-flex justify-content-center">
-                        <form method="post" action="?a=addHviezda">
+                        <form method="post" action="?c=hodnotenie&a=addHviezda">
                             <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
                             <button name="pocetHviezd" value="1" class="btn btn-secondary" type="submit"><i class='bi bi-star'></i></button>
                             <button name="pocetHviezd" value="2" class="btn btn-secondary" type="submit"><i class='bi bi-star'></i></button>
@@ -170,52 +179,53 @@
         </div>
         <div class="row">
             <div class="col-12 obsah p-4">
-                <p>
+                <p id="obsahP">
                     <?= $data['film']->obsah ?>
                 </p>
             </div>
         </div>
-
+        <?php if (\App\Auth::getName() == $data['film']->autor) { ?>
+        <label class="form-label" for="obsah">Uprav obsah</label>
+        <textarea rows="5" class="form-control " id="obsah" name="obsah" required></textarea>
+        <div class="mb-3 mt-2">
+            <button class="btn btn-secondary" type="submit" id="upravObsah">Uprav</button>
+        </div>
+        <?php } ?>
         <div class="row">
             <div class="col-12 mt-2"><h1>Komentáre</h1></div>
         </div>
-
-        <?php if (count($data['film']->getKomentare())) { ?>
         <div class="row m-2">
             <div class="col-12 komentare">
                 <div class="card bg-dark border-light">
+                    <div class="card-body" id="komentare">
+                    <?php if (count($data['film']->getKomentare()) > 0) { ?>
                     <?php foreach ($data['film']->getKomentare() as $komentar) { ?>
-                        <div class="card-body">
-                            <p class="card-text"><?= $komentar->text . " (" . $komentar->autor . ")" ?></p>
-                            <?php if (App\Auth::getName() == $komentar->autor
-                                || App\Auth::getName() == $data['film']->autor && \App\Auth::isLogged()) { ?>
-                                <form method="post" action="?a=deleteKomentar">
-                                    <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
-                                    <input type="hidden" name="KomentarId" value="<?= $komentar->id ?>">
-                                    <input type="submit" class="btn btn-secondary" name="zmaz" value="Zmaž komentar">
-                                </form>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
+                    <div id="komentar<?= $komentar->id ?>">
+                        <p class="card-text m-2" id="komentarText<?= $komentar->id ?>"><?= $komentar->text . " (" . $komentar->autor . ")" ?></p>
+                        <?php if (App\Auth::getName() == $komentar->autor
+                            || App\Auth::getName() == $data['film']->autor && \App\Auth::isLogged()) { ?>
+                        <input class="form-control" type="text" id="komUpraveny<?= $komentar->id ?>" value="<?= $komentar->text ?>">
+                        <button class="btn btn-secondary mt-2" onclick="updateKomentar(<?= $komentar->id ?>)">Uprav komentar</button>
+                        <button class="btn btn-secondary mt-2" onclick="deleteKomentar(<?= $komentar->id ?>)">Zmaz komentar</button>
+                    </div>
+                        <?php } ?>
+                    <?php }} ?>
+                    </div>
                 </div>
             </div>
         </div>
-        <?php } ?>
 
         <div class="row m-2">
             <div class="col-12 komentare">
                 <?php if (\App\Auth::isLogged()) { ?>
-                <form method="post" action="?a=addKomentar">
-                    <input type="hidden" name="filmId" value="<?php echo $data['film']->id ?>">
-                    <input type="hidden" name="autor" value="<?= \App\Auth::getName() ?>">
-                    <div class="mb-3">
+                    <div class="mb-1">
                         <label for="komentar" class="form-label">Text komentaru</label>
-                        <input class="form-control" placeholder="Zadaj komentar" type="text" name="komentar" required><br>
+                        <input class="form-control" placeholder="Zadaj komentar" type="text" name="komentar"
+                               required id="komentarNovy"><br>
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-secondary" name="odoslat" value="Odošli komentar">
+                        <button class="btn btn-secondary" id="odoslatKomentar" >Odošli komentar</button>
                     </div>
-                </form>
                 <?php } ?>
             </div>
         </div>

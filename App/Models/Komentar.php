@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Core\DB\Connection;
+
 class Komentar extends \App\Core\Model
 {
 
@@ -22,5 +24,4 @@ class Komentar extends \App\Core\Model
     {
         return 'komentare';
     }
-
 }

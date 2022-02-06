@@ -2,13 +2,14 @@ class Zoznam_filmov {
     utriedene;
     zoznamFilmov = [];
     constructor() {
-        fetch('?a=getFilmy')
+        fetch('?c=movie&a=getFilmy')
             .then(response => response.json())
             .then(filmy => {
-                this.utriedene = 'id';
                 for (let film of filmy) {
                     this.zoznamFilmov.push(film);
                 }
+                this.utriedene = 'premiera';
+                this.utried('premiera');
                 this.vypis(this.zoznamFilmov);
             });
     }
@@ -20,13 +21,13 @@ class Zoznam_filmov {
                             <tbody>
                                 <tr style="height:250px">
                                     <td class="text-light align-middle" id="obrazok`+film.id+`">
-                                        <a href="?c=home&a=film&filmId=` + film.id + `"><img src="` +
+                                        <a href="?c=movie&a=film&filmId=` + film.id + `"><img src="` +
                                         film.obrazok + `" class="img-news"></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="?c=home&a=film&filmId=` + film.id +
+                                        <a href="?c=movie&a=film&filmId=` + film.id +
                                         `" class="odkaz">` +
                                         film.nazov + `</a>
                                     </td>
@@ -60,7 +61,7 @@ class Zoznam_filmov {
     najdiFilmy(){
         let nazovFilmu = document.getElementById('nazovFilmu').value.toLowerCase();
         var filter = [];
-        fetch('?a=getFilmy')
+        fetch('?c=movie&a=getFilmy')
             .then(response => response.json())
             .then(filmy => {
                 for (let film of filmy) {
@@ -87,7 +88,7 @@ window.onload = function () {
         film.utried('hodnotenie')
     }
     document.getElementById("datum").onclick = () => {
-        film.utried('id')
+        film.utried('premiera')
     }
     document.getElementById("vyhladaj").onclick = () => {
         film.najdiFilmy();
@@ -110,7 +111,7 @@ function zobrazObr(id){
         }
     }
     let html = ""
-    html += `<a href="?c=home&a=film&filmId=` + id + `"><img src="` +
+    html += `<a href="?c=movie&a=film&filmId=` + id + `"><img src="` +
                                         obrazok + `" class="img-news"></a>`;
     document.getElementById('obrazok'+id).innerHTML = html;
 }

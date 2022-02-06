@@ -21,6 +21,7 @@ class Film extends \App\Core\Model
         public int $pocetHviezd = 0,
         public ?string $autor= null,
         public ?string $obrazok= null,
+        public ?string $premiera = null
     )
     {
 
@@ -29,7 +30,7 @@ class Film extends \App\Core\Model
     static public function setDbColumns()
     {
         return ['id','nazov','orgNazov','zaner','krajina','rezia','scenar','hraju',
-            'obsah','pocetHodnoteni','hodnotenie','pocetHviezd','autor','obrazok'];
+            'obsah','pocetHodnoteni','hodnotenie','pocetHviezd','autor','obrazok','premiera'];
     }
 
     static public function setTableName()
@@ -55,5 +56,22 @@ class Film extends \App\Core\Model
 
     public function getKomentare(){
         return Komentar::getAll('film_id = ?',[$this->id]);
+    }
+
+    public function zmaz(){
+        unlink($this->obrazok);
+        $obrazoky = $this->getObrazky();
+        foreach ($obrazoky as $obrazok) {
+            $obrazok->zmaz();
+        }
+        $komentare = $this->getKomentare();
+        foreach ($komentare as $komentar) {
+            $komentar->delete();
+        }
+        $hodnotenia = Hodnotenie::getAll('film_id = ?',[$this->id]);
+        foreach ($hodnotenia as $hodnotenie) {
+            $hodnotenie->delete();
+        }
+        $this->delete();
     }
 }

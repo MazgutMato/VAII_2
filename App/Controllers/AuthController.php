@@ -11,15 +11,13 @@ use App\Models\Pouzivatel;
 
 class AuthController extends AControllerRedirect
 {
-
     /**
      * @inheritDoc
      */
     public function index()
     {
-        // TODO: Implement index() method.
+        return $this->html();
     }
-
     public function prihlasenie() {
         if (Auth::isLogged()){
             $this->redirect('home');
@@ -32,7 +30,6 @@ class AuthController extends AControllerRedirect
             );
         }
     }
-
     public function registracia() {
         if (Auth::isLogged()){
             $this->redirect('home');
@@ -44,7 +41,6 @@ class AuthController extends AControllerRedirect
             );
         }
     }
-
     public function uzivatel() {
         if (!Auth::isLogged()){
             $this->redirect('home');
@@ -59,7 +55,6 @@ class AuthController extends AControllerRedirect
             );
         }
     }
-
     public function register(){
         $login = $this->request()->getValue('login');
         $password1 = $this->request()->getValue('password1');
@@ -85,7 +80,6 @@ class AuthController extends AControllerRedirect
         $pouzivatel->save();
         $this->redirect('auth','prihlasenie',['success' => 'Úspešne ste sa registrovali, možete sa prihlásiť!']);
     }
-
     public function login()
     {
         $login = $this->request()->getValue('login');
@@ -99,13 +93,11 @@ class AuthController extends AControllerRedirect
             $this->redirect('auth','prihlasenie',['error' => 'Nesprávne meno alebo heslo!']);
         }
     }
-
     public function logout()
     {
         Auth::logout();
         $this->redirect('home');
     }
-
     public function pridajObrazok(){
         if (isset($_POST['meno']) && isset($_FILES['obrazok'])){
             $meno = $_POST['meno'];
@@ -123,6 +115,8 @@ class AuthController extends AControllerRedirect
                 return $this->json($pouzivatel[0]);
             }
         }
+        $data['error'] = 'Nastala chyba!';
+        return $this->json($data);
     }
     public function zmazFilm(){
         if (isset($_POST['filmId'])) {
@@ -132,18 +126,12 @@ class AuthController extends AControllerRedirect
                 $data['error'] = 'Nemate opravnenie zmazat film!';
                 return $this->json($data);
             } else {
-                unlink($film->obrazok);
-                $obrazoky = Obrazok::getAll('film_id = ?', [$this->request()->getValue('filmId')]);
-                foreach ($obrazoky as $obrazok) {
-                    unlink($obrazok->obrazok);
-                }
-                Connection::connect()->prepare('DELETE FROM obrazok WHERE film_id = ?')->execute([$filmId]);
-                Connection::connect()->prepare('DELETE FROM komentare WHERE film_id = ?')->execute([$filmId]);
-                Connection::connect()->prepare('DELETE FROM hodnotenia WHERE film_id = ?')->execute([$filmId]);
-                Connection::connect()->prepare('DELETE FROM film WHERE id = ?')->execute([$filmId]);
+                $film->zmaz();
                 $data['succes'] = 'Film bol vymazany!';
                 return $this->json($data);
             }
         }
+        $data['error'] = 'Nastala chyba!';
+        return $this->json($data);
     }
 }

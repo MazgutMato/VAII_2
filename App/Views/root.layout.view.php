@@ -24,12 +24,15 @@
                     <a class="nav-link odkaz" href="?c=home">Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link odkaz" href="?c=home&a=zoznam">Zoznam filmov</a>
+                    <a class="nav-link odkaz" href="?c=movie&a=premiera">Premiera</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link odkaz" href="?c=movie&a=zoznam">Zoznam filmov</a>
                 </li>
 
                 <?php if (\App\Auth::isLogged()) {?>
                     <li class="nav-item">
-                        <a class="nav-link odkaz" href="?c=home&a=pridajFilm">Pridanie filmu</a>
+                        <a class="nav-link odkaz" href="?c=movie&a=pridajFilm">Pridanie filmu</a>
                     </li>
                     <li class="nav-item justify-content-end">
                         <a class="nav-link odkaz" href="?c=auth&a=uzivatel"><?=\App\Auth::getName()?></a>

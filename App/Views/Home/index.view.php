@@ -57,12 +57,12 @@ if ($arraySize > 0){
                     <table class="table tabulka">
                         <tbody>
                         <tr>
-                            <td><a href="?c=home&a=film&filmId=<?= $posledny->id ?>" class="odkaz">
+                            <td><a href="?c=movie&a=film&filmId=<?= $posledny->id ?>" class="odkaz">
                                 <img src="<?php echo $posledny->obrazok?>" class="img-news" alt="obrazky/chyba.jpg"></a>
                             </td>
                         </tr>
                         <tr>
-                            <td><a href="?c=home&a=film&filmId=<?= $posledny->id ?>" class="odkaz"><?= $posledny->nazov ?></a></td>
+                            <td><a href="?c=movie&a=film&filmId=<?= $posledny->id ?>" class="odkaz"><?= $posledny->nazov ?></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -87,12 +87,12 @@ if ($arraySize > 0){
                     <table class="table tabulka">
                         <tbody>
                         <tr>
-                            <td><a href="?c=home&a=film&filmId=<?= $film->id ?>" class="odkaz">
+                            <td><a href="?c=movie&a=film&filmId=<?= $film->id ?>" class="odkaz">
                                 <img src=" <?php echo $film->obrazok?>" class="img-news" alt="obrazky/chyba.jpg"></a></td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="?c=home&a=film&filmId=<?= $film->id ?>" class="odkaz"><?= $film->nazov ?></a>
+                                <a href="?c=movie&a=film&filmId=<?= $film->id ?>" class="odkaz"><?= $film->nazov ?></a>
                             </td>
                         </tr>
                         </tbody>
